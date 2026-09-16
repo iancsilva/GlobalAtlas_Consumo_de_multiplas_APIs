@@ -20,8 +20,8 @@ form.addEventListener("submit", async (event) => {
     }catch(error){
         searchScreen.style.display = "grid";
         loading.style.display = "none";
-        alert(error)
-        throw new Error(error)
+        alert(error);
+        throw new Error(error);
     }
     
     loading.style.display = "none";
