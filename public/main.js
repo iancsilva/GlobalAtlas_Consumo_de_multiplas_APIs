@@ -29,7 +29,7 @@ form.addEventListener("submit", async (event) => {
     main.style.display = "block";
 });
 
-const searchInput = document.getElementById("search_input");
+const searchInput = document.getElementById("searchInput");
 
 searchInput.addEventListener("keydown", async (event) => {
     if(event.key === "Enter") await init(searchInput.value)
