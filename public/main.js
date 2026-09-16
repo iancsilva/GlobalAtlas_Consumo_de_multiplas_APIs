@@ -47,7 +47,7 @@ async function init (country){
     render.countryHeader(countryPageData.country, countryPageData.gallery.shift());
     render.statRow(countryPageData.country);
     render.weather(countryPageData.weather, countryPageData.country.names.common, countryPageData.country.capitals[0].name);
-    render.map(params.lat, params.lon);
+    render.map(countryPageData.country.coordinates.lat, countryPageData.country.coordinates.lng);
     render.economy(countryPageData.economy, countryPageData.country.currencies[0]);
     render.society(countryPageData.economy);
     render.holidays(countryPageData.holidays)
