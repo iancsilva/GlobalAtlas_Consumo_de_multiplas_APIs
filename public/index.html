@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="main.js" defer></script>
+  <title>Global Atlas — Japão</title>
+</head>
+<body>
+
+  <div class="loading"></div>
+
+  <section id="searchScreen" class="search-screen">
+  <div class="search-container">
+
+    <div class="search-brand">
+      <span class="brand-badge">🌍</span>
+      <span>Global Atlas</span>
+    </div>
+
+    <h1>Explore the world</h1>
+    <p>
+      Pesquise um país para descobrir informações sobre clima,
+      economia, geografia e muito mais.
+    </p>
+
+    <form id="countrySearch" class="country-search">
+      <div class="search-input-wrapper">
+        <span class="search-icon">⌕</span>
+
+        <input id="countryInput" type="search" name="country" placeholder="Digite o nome de um país..." autocomplete="off" required>
+      </div>
+
+      <button type="submit">Pesquisar</button>
+    </form>
+  </div>
+</section>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#topo" aria-label="Global Atlas">
+        <span class="brand-badge">🌍</span>
+        <span>Global Atlas</span>
+      </a>
+
+      <div class="search" role="search" aria-label="Pesquisar país">
+        <span class="icon">⌕</span>
+        <input id="searchInput" type="text" value="Japão" aria-label="Pesquisar país" />
+      </div>
+    </div>
+  </header>
+
+  <main id="topo" class="page">
+    <section class="country-header">
+      <article class="country-header-card">
+        <div class="country-header-grid">
+          <div class="country-header-copy">
+            <div id="continentBadge" class="badge">Ásia Oriental</div>
+
+            <div class="country-header-title-row">
+              <h1 id="countryName">Japão</h1>
+              <span class="verified">✓</span>
+            </div>
+
+            <span id="countryNativeName" class="native">日本国 • República do Japão</span>
+            <p id="description">
+              O Japão é uma nação insular do leste da Ásia, conhecida por sua cultura rica, tecnologia avançada e harmonia entre tradição e modernidade.
+            </p>
+
+            <div class="country-header-meta" aria-label="Resumo do país">
+              <div class="meta"><span class="glyph">⌖</span><div><strong>Capital</strong><span id="countryHeaderCapital">Tóquio</span></div></div>
+              <div class="meta"><span class="glyph">👥</span><div><strong>População</strong><span id="countryHeaderPopulation">125,1 milhões</span></div></div>
+              <div class="meta"><span class="glyph">$</span><div><strong>Moeda</strong><span id="countryHeaderCurrency">Iene (JPY)</span></div></div>
+              <div class="meta"><span class="glyph">◔</span><div><strong>Fuso horário</strong><span id="countryHeaderTimezone">UTC +9</span></div></div>
+            </div>
+          </div>
+
+          <img id="countryFlagLarge" class="country-header-flag-large">
+
+        </div>
+      </article>
+    </section>
+
+    <section class="stat-row" aria-label="Informações rápidas">
+      <article class="small-card">
+        <div class="small-top"><div class="ico blue">👥</div><div class="small-label">População</div></div>
+        <div>
+          <div id="statPopulation" class="small-value">125,1 milhões</div>
+        </div>
+      </article>
+      <article class="small-card">
+        <div class="small-top"><div class="ico green">🗺</div><div class="small-label">Área Total</div></div>
+        <div>
+          <div id="statArea" class="small-value">377.975 km²</div>
+        </div>
+      </article>
+      <article class="small-card">
+        <div class="small-top"><div class="ico yellow">◉</div><div class="small-label">Moeda</div></div>
+        <div>
+          <div id="statCurrencyName" class="small-value">Iene Japonês</div>
+        </div>
+      </article>
+      <article class="small-card">
+        <div class="small-top"><div class="ico purple">⌁</div><div class="small-label">Idioma Oficial</div></div>
+        <div>
+          <div id="statOfficialLanguage" class="small-value">Japonês</div>
+        </div>
+      </article>
+      <article class="small-card">
+        <div class="small-top"><div class="ico cyan">◌</div><div class="small-label">Continente</div></div>
+        <div>
+          <div id="statContinent" class="small-value">Ásia</div>
+        </div>
+      </article>
+      <article class="small-card">
+        <div class="small-top"><div class="ico blue">✆</div><div class="small-label">Código telefônico</div></div>
+       
+          <div id="statCallingCode" class="small-value">+81</div>
+        
+      </article>
+    </section>
+
+    <section class="grid-3">
+      <article class="panel weather">
+        <div class="titlebar">
+          <div>
+            <h2 id="weatherTitle">Clima atual em Tóquio</h2>
+            <div id="weatherLocation" class="subtitle">Tóquio, Japão</div>
+          </div>
+        </div>
+
+        <div class="weather-head">
+          <div id="weatherIcon" class="weather-ico">⛅</div>
+          <div class="weather-copy">
+            <div id="weatherTemperature" class="temperature">29°C</div>
+            <div id="weatherCondition" class="weather-desc">Parcialmente nublado</div>
+            <div id="weatherFeelsLike" class="weather-sub">Sensação térmica: 31°C</div>
+          </div>
+        </div>
+
+        <div class="weather-metrics">
+          <div class="mini"><span>Humidity</span><strong id="weatherHumidity">67%</strong></div>
+          <div class="mini"><span>Wind</span><strong id="weatherWind">12 km/h</strong></div>
+          <div class="mini"><span>Pressure</span><strong id="weatherPressure">1012 hPa</strong></div>
+        </div>
+
+        <div id="forecast" class="forecast">
+         </div>
+      </article>
+
+      <article class="panel">
+        <div class="titlebar">
+          <div>
+            <h2>Map and locality</h2>
+            <div class="subtitle">Coordinates and geographical position</div>
+          </div>
+        </div>
+
+        <iframe
+          src="https://www.google.com/maps?q=35.6762,139.6503&output=embed"
+          width="100%"
+          height="80%"
+          style="border:0;"
+          loading="lazy">
+        </iframe>
+
+        <div id="mapCoordinates" class="map-foot">Coordenadas: 35.6895° N, 139.6917° E</div>
+      </article>
+
+      <article class="panel economy">
+        <div class="titlebar">
+          <div>
+            <h2>Economy</h2>
+            <div class="subtitle">Indicators and exchange</div>
+          </div>
+        </div>
+
+        <div class="economy-list">
+          <div class="economy-row"><span>PIB Nominal</span><strong id="gdpNominal">US$ 4,23 trilhões</strong></div>
+          <div class="economy-row"><span>PIB per capita</span><strong id="gdpPerCapita">US$ 33.814</strong></div>
+          <div class="economy-row"><span>Inflação (anual)</span><strong id="inflationAnnual">2,6%</strong></div>
+          <div class="economy-row"><span>Moeda</span><strong id="economyCurrency">Iene Japonês (JPY)</strong></div>
+        </div>
+
+        <div class="exchange">
+          <h3>Câmbio</h3>
+          <div class="exchange-row"><span id="exchangeBrl">1 JPY = R$ 0,033</span><span id="exchangeBrlTrend" class="trend">↗ 0,45%</span></div>
+          <div class="exchange-row"><span id="exchangeUsd">1 JPY = USD 0,0067</span><span id="exchangeUsdTrend" class="trend">↗ 0,31%</span></div>
+
+          <div id="exchangeChart" class="chart" aria-hidden="true">
+            <canvas id="chart"></canvas>
+          </div>
+
+        </div>
+      </article>
+    </section>
+
+    <section class="triple-grid">
+      <article class="subpanel society">
+        <div class="panel-head">
+          <div>
+            <h2>Society and development</h2>
+            <div class="subtitle">Social profile of the country</div>
+          </div>
+        </div>
+
+        <div class="list">
+          <div class="row">
+            <div class="left"><span class="sico green">♥</span><div><h3>Life expectancy</h3><p id="lifeExpectancy">84,6 anos</p></div></div>
+          </div>
+          <div class="row">
+            <div class="left"><span class="sico cyan">▤</span><div><h3>Literacy</h3><p id="literacy">99%</p></div></div>
+          </div>
+          <div class="row">
+            <div class="left"><span class="sico purple">◫</span><div><h3>HDI (Human Development Index)</h3><p id="humanDevelopmentIndex">0,925 • Muito alto</p></div></div>
+          </div>
+          <div class="row">
+            <div class="left"><span class="sico yellow">☗</span><div><h3>Income Level</h3><p id="incomeLevel">Monarquia parlamentarista</p></div></div>
+          </div>
+          <div class="row">
+            <div class="left"><span class="sico yellow">☗</span><div><h3>Urban population</h3><p id="urbanPopulation">Monarquia parlamentarista</p></div></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="subpanel holidays">
+        <div class="panel-head">
+          <div>
+            <h2>Upcoming national holidays</h2>
+            <div class="subtitle">Official events</div>
+          </div>
+        </div>
+
+        <div class="list">
+        </div>
+      </article>
+
+      <article class="subpanel neighbors">
+        <div class="panel-head">
+          <div>
+            <h2>Neighboring countries</h2>
+            <div class="subtitle">Geographical relations</div>
+          </div>
+        </div>
+
+        <div class="list">
+        </div>
+      </article>
+    </section>
+
+    <section class="bottom-grid">
+      <article class="bottom-panel news">
+        <div class="panel-head">
+          <div>
+            <h2>Related News</h2>
+            <div class="subtitle">Latest headlines</div>
+          </div>
+        </div>
+
+        <div class="news-list">
+
+        </div>
+      </article>
+
+      <article class="bottom-panel gallery">
+        <div class="panel-head">
+          <div>
+            <h2>Country gallery</h2>
+            <div class="subtitle">Featured Images</div>
+          </div>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item gallery-left">
+            <img id="gallery_image_1" src="" alt="">
+            <div id="gallery_label_1" class="gallery-label"></div>
+          </div>
+
+          <div class="gallery-rights">
+            <div class="gallery-item gallery-right">
+              <img id="gallery_image_2" src="" alt="">
+              <div id="gallery_label_2" class="gallery-label"></div>
+            </div>
+
+            <div class="gallery-item gallery-right">
+              <img id="gallery_image_3" src="" alt="">
+              <div id="gallery_label_3" class="gallery-label"></div>
+            </div>
+
+            <div class="gallery-item gallery-right">
+              <img id="gallery_image_4" src="" alt="">
+              <div id="gallery_label_4" class="gallery-label"></div>
+            </div>
+          </div>
+      </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <div>Dados fornecidos por diversas APIs públicas</div>
+      <div id="lastUpdated">• Última atualização: 15/05/2024 14:30</div>
+      <div class="footer-social" aria-label="Redes sociais">
+        <button class="icon-btn" type="button" aria-label="X">𝕏</button>
+        <button class="icon-btn" type="button" aria-label="GitHub">⌂</button>
+        <button class="icon-btn" type="button" aria-label="Globo">◌</button>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
