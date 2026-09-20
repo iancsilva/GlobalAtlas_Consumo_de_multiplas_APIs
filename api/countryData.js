@@ -3,7 +3,7 @@ import * as api from "../services/apis.js"
 export default async function handler(req, res) {
     try{
 
-      const country = req.query.country;
+      const country = encodeURIComponent(req.query.country);
     
     if (!country) {
             return res.status(400).json({
@@ -67,7 +67,7 @@ export default async function handler(req, res) {
     }catch(error){
 
       return res.status(500).json({
-            error: "Não foi possível carregar os dados do país."
+            error
         });
 
     }
