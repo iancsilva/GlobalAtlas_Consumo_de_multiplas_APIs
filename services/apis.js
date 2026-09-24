@@ -1,20 +1,41 @@
-export async function request(URL, header = {}) {
+export async function request(url, options = {}) {
+    try {
+        console.log("INICIANDO:", url);
 
-    const response = await fetch(URL, header);
+        const response = await fetch(url, options);
 
-    if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
+        console.log("RESPONDEU:", url, response.status);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        return await response.json();
+
+    } catch (error) {
+        console.error("FALHOU:", url);
+        console.error(error);
+        throw error;
     }
-
-    return response.json();
 }
 
 const currentDate = new Date();
 
 export async function restCountry(country) {
 
-  return request(`https://api.restcountries.com/countries/v5?q=${country}`, { headers: { 'Authorization': `Bearer ${process.env.API_KEY_RESTCOUNTRIES}` } }); 
+  const headers = {
+    Authorization: `Bearer ${process.env.API_KEY_RESTCOUNTRIES}`
+  };
 
+  let response = await request(`https://api.restcountries.com/countries/v5?q=${country}`, { headers });
+
+  if (response.data.objects.length > 0) {
+    return response;
+  }
+
+  response = await request(`https://api.restcountries.com/countries/v5/names.translations?q=${country}`, { headers });
+
+  return response;
 }
 
 export async function openMeteo(lat, lon) {

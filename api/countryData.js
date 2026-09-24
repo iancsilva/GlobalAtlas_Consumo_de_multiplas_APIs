@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     try{
 
       const country = encodeURIComponent(req.query.country);
-    
+      
     if (!country) {
             return res.status(400).json({
                 error: "O país não foi informado."
@@ -29,7 +29,17 @@ export default async function handler(req, res) {
       gallery: {}
     };
 
-    countryPageData.country = (await api.restCountry(country)).data.objects[0];
+    const restCountryResponse = await api.restCountry(country);
+
+    const countries = restCountryResponse.data.objects;
+
+    if (!countries || countries.length === 0) {
+        return res.status(404).json({
+            error: `País "${req.query.country}" não encontrado.`
+        });
+    }
+
+    countryPageData.country = countries[0];
       
     const params = {
       name: countryPageData.country.names.common,
@@ -60,16 +70,16 @@ export default async function handler(req, res) {
     countryPageData.holidays = nagerHolidays;
     countryPageData.neighbors = neighbors.map(neighbor => neighbor.data.objects[0]);
     countryPageData.news = newsApi.articles;
-    countryPageData.gallery = unsplash.map(photo => ({alt_description: photo.results[0].alt_description, url: photo.results[0].urls.regular}));
+    countryPageData.gallery = unsplash.filter(photo => photo.results && photo.results.length > 0).map(photo => ({alt_description: photo.results[0].alt_description, url: photo.results[0].urls.regular}));
     
     res.status(200).json(countryPageData);
 
-    }catch(error){
+    }catch (error) {
+    console.error("ERRO REAL:", error);
 
-      return res.status(500).json({
-            error
-        });
-
-    }
+    return res.status(500).json({
+        error: error.message
+    });
+}
     
 }

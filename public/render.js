@@ -23,8 +23,8 @@ export function statRow(data){
     const elements = {};
     document.querySelectorAll(".stat-row [id]").forEach(element => elements[element.id] = element);
 
-    elements.statPopulation.textContent = data.population;
-    elements.statArea.textContent = `${data.area.kilometers} km²`;
+    elements.statPopulation.textContent = numberFormated(data.population);
+    elements.statArea.textContent = `${numberFormated(data.area.kilometers)} km²`;
     elements.statCurrencyName.textContent = data.currencies[0].name;
     elements.statOfficialLanguage.textContent = data.languages[0].name;
     elements.statContinent.textContent = data.region;
@@ -179,6 +179,7 @@ export function weather(data, country, capital){
 
     const elements = {};
     document.querySelectorAll(".weather [id]").forEach(element => elements[element.id] = element)
+    elements.forecast.innerHTML = ""
 
     const dayOrNightIcon = data.current.is_day === 0? "dayIcon" : "nightIcon";
 
@@ -215,6 +216,8 @@ export function map(lat, lon){
     coordinates.textContent = `Coordinates: ${lat}, ${lon}`
 }
 
+let chart;
+
 export function economy(data, currency){
 
     const elements = {};
@@ -223,13 +226,13 @@ export function economy(data, currency){
     const variationBrl = (((data.exchange.at(-2).rate / data.exchange.at(0).rate) - 1) * 100).toFixed(2);
     const variationUsd = (((data.exchange.at(-1).rate / data.exchange.at(1).rate) - 1) * 100).toFixed(2);
 
-    elements.gdpNominal.textContent = `US$ ${data.indicators[0].value}`;
-    elements.gdpPerCapita.textContent = `US$ ${data.indicators[1].value}`;
-    elements.inflationAnnual.textContent = `${data.indicators[2].value}%`;
+    elements.gdpNominal.textContent = `US$ ${numberFormated(data.indicators[0].value)}`;
+    elements.gdpPerCapita.textContent = `US$ ${numberFormated(data.indicators[1].value)}`;
+    elements.inflationAnnual.textContent = `${numberFormated(data.indicators[2].value)}%`;
     elements.economyCurrency.textContent = `${currency.name} (${currency.code})`;
-    elements.exchangeBrl.textContent = `1 ${currency.code} = R$ ${data.exchange.at(-2).rate}`;
+    elements.exchangeBrl.textContent = `1 ${currency.code} = R$ ${numberFormated(data.exchange.at(-2).rate)}`;
     elements.exchangeBrlTrend.textContent = `${variationBrl}%`;
-    elements.exchangeUsd.textContent = `1 ${currency.code} = USD ${data.exchange.at(-1).rate}`;
+    elements.exchangeUsd.textContent = `1 ${currency.code} = USD ${numberFormated(data.exchange.at(-1).rate)}`;
     elements.exchangeUsdTrend.textContent = `${variationUsd}%`;
 
     if(variationBrl < 0){
@@ -247,8 +250,12 @@ export function economy(data, currency){
     const labels = data.exchange.filter((item, i) => {if(i%2 === 0) return item}).map(item => item.date.slice(2, 7).replaceAll("-", "/"));
     const brlData = data.exchange.filter(item => item.quote === "BRL").map(item => item.rate);
     const usdData = data.exchange.filter(item => item.quote === "USD").map(item => item.rate);
-    
-    const chart = new Chart(elements.chart, {
+
+    if (chart) {
+        chart.destroy();
+    }
+
+    chart = new Chart(elements.chart, {
         type: "line",
 
         data:{
@@ -312,6 +319,8 @@ export function holidays(data){
     
     const listHolidays = document.querySelector(".holidays .list");
 
+    listHolidays.innerHTML = "";
+
     for (const holiday of data) {
 
         const dateHoliday = new Date(holiday.date);
@@ -347,6 +356,15 @@ export function neighbors(data){
 
     const listNeighbors = document.querySelector(".neighbors .list");
 
+    listNeighbors.innerHTML = "";
+
+    if (!data || data.length === 0) {
+        listNeighbors.innerHTML = `
+            <p>No neighbors found for this country.</p>
+        `;
+        return;
+    }
+
     for (const neighbor of data) {
 
         listNeighbors.insertAdjacentHTML("beforeend", `
@@ -368,14 +386,29 @@ export function news(data){
 
     const listNews = document.querySelector(".news .news-list");
 
-    for (const news of data) {
+    listNews.innerHTML = "";
+
+    if (!data || data.length === 0) {
+        listNews.innerHTML = `
+            <p>No news found for this country.</p>
+        `;
+        return;
+    }
+
+    for (let news = 0; news < 3; news++) {
+
+        const article = data[news];
+
+        const urlToImage = article.urlToImage
+            ? article.urlToImage
+            : "";
 
         listNews.insertAdjacentHTML("beforeend", `
         <div class="news-item">
-            <div class="thumb mountain"></div>
+            <img class="thumb" src=${urlToImage}>
             <div class="news-copy">
-              <h3>Japão lança novo plano para energia renovável até 2040</h3>
-              <div class="news-meta">NHK World · 2h atrás</div>
+              <a href"${data[news].url} target"_blank""><h3>${data[news].title}</h3></a>
+              <div class="news-meta"${data[news].source.name} · ${new Date(data[news].publishedAt).toLocaleDateString("pt-BR")}</div>
             </div>
           </div>
         `)
@@ -408,4 +441,13 @@ function getIncomeLevel(gni) {
     if (gni <= 4635) return "Lower-middle income";
     if (gni <= 14375) return "Upper-middle income";
     return "High income";
+}
+
+function numberFormated(number){
+
+    return number.toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+});
+
 }
