@@ -962,7 +962,7 @@ h1 {
 
 .news-list {
   display: grid;
-  gap: 30px;
+  gap: 20px;
 }
 
 .news-item {
