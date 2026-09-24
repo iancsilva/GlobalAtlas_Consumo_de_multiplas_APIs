@@ -942,6 +942,7 @@ h1 {
   padding: 14px;
   border-radius: 16px;
   border: 1px solid var(--line-soft);
+  background: linear-gradient(180deg, rgba(14, 25, 44, 0.94), rgba(12, 20, 36, 0.95));
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
@@ -1000,11 +1001,7 @@ h1 {
   position: absolute;
   inset: auto 0 0;
   height: 35%;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(0,0,0,0.28)
-  );
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.28));
 }
 
 .news-copy h3 {
@@ -1069,11 +1066,7 @@ h1 {
   position: absolute;
   inset: auto 0 0;
   height: 36%;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(0,0,0,0.3)
-  );
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.3));
   pointer-events: none;
 }
 
